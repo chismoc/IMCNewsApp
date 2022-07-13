@@ -3,8 +3,10 @@ package com.example.android.imcnewsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.GridView;
 
 import com.bumptech.glide.request.RequestOptions;
+import com.example.android.imcnewsapp.adapters.GridCategoryAdapter;
 import com.glide.slider.library.SliderLayout;
 import com.glide.slider.library.slidertypes.BaseSliderView;
 import com.glide.slider.library.slidertypes.DefaultSliderView;
@@ -16,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     //images for user at homepage
     SliderLayout sliderLayout;
+    GridView gridView;
+
+    GridCategoryAdapter gridCategoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void InitialiseViews() {
         sliderLayout = findViewById(R.id.slider);
-
+        gridView = findViewById(R.id.gridView);
+        gridCategoryAdapter = new GridCategoryAdapter(this);
+        gridView.setAdapter(gridCategoryAdapter);
     }
 
     //if slider is stopped close the slider
