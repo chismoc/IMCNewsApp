@@ -34,11 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void AddImagesToSlider() {
         List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.beautifulsite1);
-        images.add(R.drawable.beautifulsite4);
-        images.add(R.drawable.beautifulsite6);
-        images.add(R.drawable.beautifulsite7);
-        images.add(R.drawable.beautifulsite8);
+        images.add(R.drawable.basic);
+        images.add(R.drawable.android);
+        images.add(R.drawable.binary);
+        images.add(R.drawable.components);
+        images.add(R.drawable.db);
+        images.add(R.drawable.html);
+        images.add(R.drawable.java);
+        images.add(R.drawable.logic);
+
 
         //
         for (int i = 0; i < images.size(); i++) {
