@@ -7,12 +7,20 @@ import android.widget.GridView;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.example.android.imcnewsapp.adapters.GridCategoryAdapter;
+import com.example.android.imcnewsapp.rest.ApiClient;
+import com.example.android.imcnewsapp.rest.ApiInterface;
 import com.glide.slider.library.SliderLayout;
 import com.glide.slider.library.slidertypes.BaseSliderView;
 import com.glide.slider.library.slidertypes.DefaultSliderView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +37,33 @@ public class MainActivity extends AppCompatActivity {
 
         //method to initialise widgets
         InitialiseViews();
+
         AddImagesToSlider();
+
+        //Getting news
+        getHomeData();
+    }
+
+    private void getHomeData() {
+
+        ApiInterface  apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Map<String, String> params = new HashMap<>();
+        params.put("page",1+"");
+        params.put("posts",10+"");
+
+        Call<Object> call = apiInterface.getHomepageApi(params);
+        call.enqueue(new Callback<Object>() {
+
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+
+            }
+        });
     }
 
     private void AddImagesToSlider() {
