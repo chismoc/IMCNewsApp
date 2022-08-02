@@ -13,7 +13,13 @@ public interface ApiInterface {
     // JSON --> GSON Library --> Java Object
 
     @GET("homepage_api")
-    Call<Object>getHomepageApi(@QueryMap Map<String, String> params);
+    Call<HomepageModel> getHomepageApi(@QueryMap Map<String, String> params);
+
+
+    // Getting news by id
+    // Displaying news details using news id
+    @GET("news_by_pid")
+    Call<HomepageModel> getNewsDetailsById(@QueryMap Map<String, String> params);
 
 
 }
