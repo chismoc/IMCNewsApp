@@ -92,7 +92,7 @@ public class News {
        private SourceLogo sourceLogo;
        @SerializedName("image")
        @Expose
-       private Boolean image;
+       private String image;
 
        /**
         * No args constructor for use in serialization
@@ -113,7 +113,7 @@ public class News {
         * @param title
         * @param url
         */
-       public News(Integer pid, String postDate, String title, String url, String postContent, String source, String sourceUrl, SourceLogo sourceLogo, Boolean image) {
+       public News(Integer pid, String postDate, String title, String url, String postContent, String source, String sourceUrl, SourceLogo sourceLogo, String image) {
               super();
               this.pid = pid;
               this.postDate = postDate;
@@ -190,11 +190,11 @@ public class News {
               this.sourceLogo = sourceLogo;
        }
 
-       public Boolean getImage() {
+       public String getImage() {
               return image;
        }
 
-       public void setImage(Boolean image) {
+       public void setImage(String image) {
               this.image = image;
        }
 

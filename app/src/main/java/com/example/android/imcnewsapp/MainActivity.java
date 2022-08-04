@@ -1,12 +1,15 @@
 package com.example.android.imcnewsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.GridView;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.example.android.imcnewsapp.adapters.GridCategoryAdapter;
+import com.example.android.imcnewsapp.adapters.NewsAdapter;
 import com.example.android.imcnewsapp.model.HomepageModel;
 import com.example.android.imcnewsapp.rest.ApiClient;
 import com.example.android.imcnewsapp.rest.ApiInterface;
@@ -27,9 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
     //images for user at homepage
     SliderLayout sliderLayout;
-    GridView gridView;
 
+    GridView gridView;
     GridCategoryAdapter gridCategoryAdapter;
+
+    // we will load real news from our website
+    RecyclerView recyclerView;
+    NewsAdapter newsAdapter;
+    List<HomepageModel.News> news;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +99,20 @@ public class MainActivity extends AppCompatActivity {
 
             sliderLayout.addSlider(defaultSliderView);
         }
+
+        // Setting the slider options
+        sliderLayout.startAutoCycle();
+        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Stack);
+        sliderLayout.setDuration(3000);
+        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
+
+
+
+        for(int i = 0; i < body.getNews().size(); i++){
+            news.add(body.getNews().get(i));
+        }
+
+        recyclerView.setAdapter(newsAdapter);
     }
 
     private void AddImagesToSlider() {
@@ -102,6 +124,16 @@ public class MainActivity extends AppCompatActivity {
         gridView = findViewById(R.id.gridView);
         gridCategoryAdapter = new GridCategoryAdapter(this);
         gridView.setAdapter(gridCategoryAdapter);
+
+        // RecyclerView
+        recyclerView = findViewById(R.id.recyclerNews);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setNestedScrollingEnabled(false);
+
+        news = new ArrayList<>();
+        newsAdapter = new NewsAdapter(this, news);
+
     }
 
     //if slider is stopped close the slider
@@ -110,4 +142,5 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         sliderLayout.stopAutoCycle();
     }
+
 }
