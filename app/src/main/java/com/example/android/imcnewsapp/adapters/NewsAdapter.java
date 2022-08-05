@@ -67,14 +67,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             viewHolder.newsSource.setText(singleNews.getSource());
         }
 
-      //  if(singleNews.getImage().length() <=1){
-          //  viewHolder.newsImage.setVisibility(View.GONE);
-      //  }else{
-          //  viewHolder.newsImage.setVisibility(View.VISIBLE);
+       if(singleNews.getImage().length() <=1){
+          viewHolder.newsImage.setVisibility(View.GONE);
+       }else{
+          viewHolder.newsImage.setVisibility(View.VISIBLE);
             Glide.with(context)
                     .load(singleNews.getImage())
                     .into(viewHolder.newsImage);
-      //  }
+      }
 
     }
 
