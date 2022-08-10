@@ -34,10 +34,14 @@ public class MainActivity extends AppCompatActivity {
     GridView gridView;
     GridCategoryAdapter gridCategoryAdapter;
 
-    // we will load real news from our website
+
     RecyclerView recyclerView;
     NewsAdapter newsAdapter;
     List<HomepageModel.News> news;
+
+    //Categories List
+    List<HomepageModel.CategoryButton> categoryButtons;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         recyclerView.setAdapter(newsAdapter);
+
+categoryButtons.addAll(body.getCategoryButton());
+        gridView.setAdapter(gridCategoryAdapter);
     }
 
     private void AddImagesToSlider() {
@@ -120,10 +127,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void InitialiseViews() {
+
+        categoryButtons = new ArrayList<>();
         sliderLayout = findViewById(R.id.slider);
         gridView = findViewById(R.id.gridView);
-        gridCategoryAdapter = new GridCategoryAdapter(this);
-        gridView.setAdapter(gridCategoryAdapter);
+        gridCategoryAdapter = new GridCategoryAdapter(this, categoryButtons);
+
 
         // RecyclerView
         recyclerView = findViewById(R.id.recyclerNews);

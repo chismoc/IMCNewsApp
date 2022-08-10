@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.android.imcnewsapp.R;
+import com.example.android.imcnewsapp.model.HomepageModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,33 +21,27 @@ public class GridCategoryAdapter extends BaseAdapter {
 
     LayoutInflater layoutInflater;
     Context context;
-    List<DemoCategory> demoCategoryList;
+    List<HomepageModel.CategoryButton> categoryButtons;
 
     //constructor
 
-    public GridCategoryAdapter(Context context) {
+    public GridCategoryAdapter(Context context, List<HomepageModel.CategoryButton> categoryButtons) {
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        demoCategoryList = new ArrayList<>();
 
-        demoCategoryList.add(new DemoCategory(R.drawable.icn1,"Basics"));
-        demoCategoryList.add(new DemoCategory(R.drawable.icn2,"Logic"));
-        demoCategoryList.add(new DemoCategory(R.drawable.icn3,"Android"));
-        demoCategoryList.add(new DemoCategory(R.drawable.icn5,"Binary"));
-        demoCategoryList.add(new DemoCategory(R.drawable.icn6,"Components"));
-        demoCategoryList.add(new DemoCategory(R.drawable.icn7,"Java"));
-        demoCategoryList.add(new DemoCategory(R.drawable.icn8,"HTML"));
-        demoCategoryList.add(new DemoCategory(R.drawable.ic4,"Database"));
+        this.categoryButtons = categoryButtons;
+
+
            }
 
     @Override
     public int getCount() {
-        return demoCategoryList.size();
+        return categoryButtons.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return demoCategoryList.get(position);
+        return categoryButtons.get(position);
     }
 
     @Override
@@ -56,50 +51,40 @@ public class GridCategoryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-       CategoryViewHolder categoryViewHolder = null ;
+        CategoryViewHolder categoryViewHolder = null;
 
-        if (convertView == null)
-        {
-            convertView  = layoutInflater.inflate(R.layout.item_category_layout,null);
+        if (convertView == null) {
+            convertView = layoutInflater.inflate(R.layout.item_category_layout, null);
             categoryViewHolder = new CategoryViewHolder();
             categoryViewHolder.circleImageView = convertView.findViewById(R.id.category_image);
             categoryViewHolder.textView = convertView.findViewById(R.id.text_category);
             convertView.setTag(categoryViewHolder);
-        }else{
+        } else {
             categoryViewHolder = (CategoryViewHolder) convertView.getTag();
         }
 
         //pass the data to text and imageview using Glide
 
-       categoryViewHolder.textView.setText(demoCategoryList.get(position).imageName);
+        categoryViewHolder.textView.setText(categoryButtons.get(position).getName());
 
         Glide.with(context)
-                .load(demoCategoryList.get(position).imageId).into(categoryViewHolder.circleImageView);
+                .load(categoryButtons.get(position).getImage()).into(categoryViewHolder.circleImageView);
 
 
-      //  if (categoryBottons.get(position).getColor() != null) {
-       //     hOldery.circleImageView.setCircleBackgroundColor(Color.parseColor(categoryBottons.get(position).getColor()));
-     //       hOldery.circleImageView.setBorderColor(Color.parseColor(categoryBottons.get(position).getColor()));
-       // }
+        if (categoryButtons.get(position).getColor() != null) {
+        categoryViewHolder.circleImageView.setCircleBackgroundColor(Color.parseColor(categoryButtons.get(position).getColor()));
+        categoryViewHolder.circleImageView.setBorderColor(Color.parseColor(categoryButtons.get(position).getColor()));
+        }
 
         return convertView;
     }
 
     //viewHolder
-    static class CategoryViewHolder{
+    static class CategoryViewHolder {
         CircleImageView circleImageView;
         TextView textView;
     }
 
-    class DemoCategory {
-        int imageId;
-        String imageName;
-
-        public DemoCategory(int imageId, String imageName) {
-            this.imageId = imageId;
-            this.imageName = imageName;
-        }
-    }
 
     // We will create a real Category class that fetches data from net
 
