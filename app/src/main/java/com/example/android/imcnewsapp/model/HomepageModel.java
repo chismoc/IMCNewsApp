@@ -19,6 +19,19 @@ public class HomepageModel {
        @Expose
        private List<News> news = null;
 
+
+       @SerializedName("CategoryButton")
+       @Expose
+       private List<CategoryButton> categoryButton = null;
+
+       public List<CategoryButton> getCategoryButton() {
+              return categoryButton;
+       }
+
+       public void setCategoryButton(List<CategoryButton> categoryButton) {
+              this.categoryButton = categoryButton;
+       }
+
        /**
         * No args constructor for use in serialization
         *
@@ -1023,4 +1036,90 @@ public class Advertisement {
               }
 
        }
+
+       public class CategoryButton {
+
+              @SerializedName("catID")
+              @Expose
+              private Integer catID;
+              @SerializedName("name")
+              @Expose
+              private String name;
+              @SerializedName("taxonomy")
+              @Expose
+              private Object taxonomy;
+              @SerializedName("color")
+              @Expose
+              private String color;
+              @SerializedName("image")
+              @Expose
+              private String image;
+
+              /**
+               * No args constructor for use in serialization
+               *
+               */
+              public CategoryButton() {
+              }
+
+              /**
+               *
+               * @param catID
+               * @param image
+               * @param color
+               * @param name
+               * @param taxonomy
+               */
+              public CategoryButton(Integer catID, String name, Object taxonomy, String color, String image) {
+                     super();
+                     this.catID = catID;
+                     this.name = name;
+                     this.taxonomy = taxonomy;
+                     this.color = color;
+                     this.image = image;
+              }
+
+              public Integer getCatID() {
+                     return catID;
+              }
+
+              public void setCatID(Integer catID) {
+                     this.catID = catID;
+              }
+
+              public String getName() {
+                     return name;
+              }
+
+              public void setName(String name) {
+                     this.name = name;
+              }
+
+              public Object getTaxonomy() {
+                     return taxonomy;
+              }
+
+              public void setTaxonomy(Object taxonomy) {
+                     this.taxonomy = taxonomy;
+              }
+
+              public String getColor() {
+                     return color;
+              }
+
+              public void setColor(String color) {
+                     this.color = color;
+              }
+
+              public String getImage() {
+                     return image;
+              }
+
+              public void setImage(String image) {
+                     this.image = image;
+              }
+
+       }
+
+
 }
