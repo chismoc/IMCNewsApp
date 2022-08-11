@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.android.imcnewsapp.R;
+import com.example.android.imcnewsapp.activities.NewsDetailsActivity;
 import com.example.android.imcnewsapp.model.HomepageModel;
 
 import java.util.List;
@@ -63,18 +64,18 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         viewHolder.newsTitle.setText(removeHtml(singleNews.getTitle()).trim());
         viewHolder.newsDesc.setText(removeHtml(singleNews.getPostContent()).trim());
 
-        if (singleNews.getSource() != null){
+        if (singleNews.getSource() != null) {
             viewHolder.newsSource.setText(singleNews.getSource());
         }
 
-       if(singleNews.getImage().length() <=1){
-          viewHolder.newsImage.setVisibility(View.GONE);
-       }else{
-          viewHolder.newsImage.setVisibility(View.VISIBLE);
+        if (singleNews.getImage().length() <= 1) {
+            viewHolder.newsImage.setVisibility(View.GONE);
+        } else {
+            viewHolder.newsImage.setVisibility(View.VISIBLE);
             Glide.with(context)
                     .load(singleNews.getImage())
                     .into(viewHolder.newsImage);
-      }
+        }
 
     }
 
@@ -90,23 +91,27 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         View holder;
         ImageView newsImage;
         TextView newsTitle, newsDesc, newsDate, newsSource, newsView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             holder = itemView;
             newsImage = holder.findViewById(R.id.news_image);
             newsTitle = holder.findViewById(R.id.news_title);
-            newsDesc  = holder.findViewById(R.id.news_desc);
-            newsDate  = holder.findViewById(R.id.news_date);
-            newsView  = holder.findViewById(R.id.news_view);
-            newsSource= holder.findViewById(R.id.news_source);
+            newsDesc = holder.findViewById(R.id.news_desc);
+            newsDate = holder.findViewById(R.id.news_date);
+            newsView = holder.findViewById(R.id.news_view);
+            newsSource = holder.findViewById(R.id.news_source);
 
+            //click Listener for news item
             holder.setOnClickListener(this);
         }
 
-
+        //MainActivity to NewsDatailsActivity
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(context, NewsDetailsActivity.class);
+            intent.putExtra("pid", news.get(getAdapterPosition()).getPid());
+            context.startActivity(intent);
 
 
         }
@@ -116,15 +121,13 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
-
-
     // Removing HTML Codes
-    public static String removeHtml(String html){
-        html = html.replaceAll("<(.*?)\\>"," ");//Removes all items in brackets
-        html = html.replaceAll("<(.*?)\\\n"," ");//Must be undeneath
+    public static String removeHtml(String html) {
+        html = html.replaceAll("<(.*?)\\>", " ");//Removes all items in brackets
+        html = html.replaceAll("<(.*?)\\\n", " ");//Must be undeneath
         html = html.replaceFirst("(.*?)\\>", " ");//Removes any connected item to the last bracket
-        html = html.replaceAll("&nbsp;"," ");
-        html = html.replaceAll("&amp;"," ");
+        html = html.replaceAll("&nbsp;", " ");
+        html = html.replaceAll("&amp;", " ");
         return html;
         // Check the description and the source code if you want it
     }
