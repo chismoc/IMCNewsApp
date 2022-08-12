@@ -18,7 +18,7 @@ public interface ApiInterface {
 
     // Getting news by id
     // Displaying news details using news id
-    @GET("news_by_pid")
+    @GET("news_by_postId")
     Call<HomepageModel> getNewsDetailsById(@QueryMap Map<String, String> params);
 
 

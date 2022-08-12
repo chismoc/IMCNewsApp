@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:id="@+id/news_image"
+            android:id="@+id/news_detail_image"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@drawable/icn6"/>
@@ -32,7 +32,7 @@
             android:textColor="#000"
             android:paddingLeft="4dp"
             android:paddingEnd="10dp"
-            android:layout_below="@id/news_image"
+            android:layout_below="@id/news_detail_image"
             android:textStyle="bold"
             android:textSize="18sp"
             android:lineSpacingExtra="5dp"

@@ -95,7 +95,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             holder = itemView;
-            newsImage = holder.findViewById(R.id.news_image);
+            newsImage = holder.findViewById(R.id.news_detail_image);
             newsTitle = holder.findViewById(R.id.news_title);
             newsDesc = holder.findViewById(R.id.news_desc);
             newsDate = holder.findViewById(R.id.news_date);
@@ -112,12 +112,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Intent intent = new Intent(context, NewsDetailsActivity.class);
             intent.putExtra("pid", news.get(getAdapterPosition()).getPid());
             context.startActivity(intent);
-
-
         }
 
-        // Every thing is working fine...
-        // Now, let's add the details for every news
     }
 
 

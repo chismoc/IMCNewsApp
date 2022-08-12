@@ -118,12 +118,12 @@
                         </RelativeLayout>
 
                         <ImageView
+                            android:id="@+id/news_detail_image"
                             android:layout_width="match_parent"
-                            android:adjustViewBounds="true"
-                            android:id="@+id/news_image"
-                            android:src="@drawable/icon_youtube"
+                            android:layout_height="wrap_content"
                             android:layout_below="@id/wrapper_news"
-                            android:layout_height="wrap_content"/>
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/icon_youtube" />
 
 
                         <TextView
@@ -132,7 +132,7 @@
                             android:id="@+id/news_desc"
                             android:padding="10dp"
                             android:text="News Description"
-                            android:layout_below="@id/news_image"
+                            android:layout_below="@id/news_detail_image"
                             android:layout_height="wrap_content"/>
 
                         <Button
